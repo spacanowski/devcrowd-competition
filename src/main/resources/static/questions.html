@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script src="./handlebars-v3.0.1.js"></script>
+      <script src="./jquery-2.1.3.min.js"></script>
+      <script src="./bootstrap/js/bootstrap.js"></script>
+      <link href="./style.css" rel="stylesheet" type="text/css" />
+      <link href="./bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+    <div class="container-fluid">
+    <div class="jumbotron">
+  <h1>'Game of Java' Challenge</h1>
+    <p>Game consists of two parts. One is solving simple quiz. Correct answers will give you points for second part.
+    Which is 'Conway's Game of Life'. Earned points are used for selecting alive cells. One point is one cell.
+    At the end of conference we will run every solution and declare winer person who had biggest count of alive cells.</p>
+</div>
+    <div class="panel panel-default">
+    <div class="panel-body">
+    <form>
+    <div class="form-group">
+		<label for="name">Name:</label>
+		<input type="text" id="name" class="form-control" >
+		</div>
+		<div class="form-group">
+		<label for="email">Email:</label>
+		<input type="email" id="email" class="form-control" >
+		</div>
+		<div class="panel panel-default">
+    <div class="panel-body bg-info">
+      <div id="field" ></div>
+      </div>
+      </div>
+	</form>
+
+    </div>
+    </div>
+      <button id="submitAns" onclick="send()" class="btn btn-primary btn-block">Submit answers</button>
+    </div>
+      <script id="questionsForm" type="text/x-handlebars-template">
+        {{#questions}}
+        <div class="question" number="{{questionId}}">
+            <label for="que-{{index}}">{{question}}</label>
+          <select class="form-control" id="que-{{index}}">
+            <option selected="selected"></option>
+            {{#answers}}
+              <option value="{{value}}">{{answer}}</option>
+            {{/answers}}
+          </select>
+        </div>
+        {{/questions}}
+      </script>
+
+      <script src="./questions.js"></script>
+    </body>
+</html>

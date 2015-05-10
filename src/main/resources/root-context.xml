@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+	   http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+		<util:list id="questions" value-type="pl.gda.spc.model.Question">
+            <bean class="pl.gda.spc.model.Question">
+                <property name="questionId" value="1" />
+                <property name="question" value="O co reprezentacje w REST wzbogaca HATEOAS?" />
+                <property name="answers" >
+                    <util:list value-type="pl.gda.spc.model.Answer">
+                        <bean class="pl.gda.spc.model.Answer">
+                            <property name="answer" value="O informacje o cache'owaniu" />
+                            <property name="value" value="a" />
+                        </bean>
+                        <bean class="pl.gda.spc.model.Answer">
+                            <property name="answer" value="O linki do innych zasobów" />
+                            <property name="value" value="b" />
+                            <property name="correct" value="true" />
+                        </bean>
+                        <bean class="pl.gda.spc.model.Answer">
+                            <property name="answer" value="O kod, który powinien zostać wykonany na kliencie" />
+                            <property name="value" value="c" />
+                        </bean>
+                        <bean class="pl.gda.spc.model.Answer">
+                            <property name="answer" value="O informacje o obsługiwanych metodach HTTP" />
+                            <property name="value" value="d" />
+                        </bean>
+                    </util:list>
+                </property>
+            </bean>
+            <bean class="pl.gda.spc.model.Question">
+                <property name="questionId" value="2" />
+                <property name="question" value="Który z poniższych frameworków, umożliwi nam automatyczne testowanie kodu JavaScript na realnych urządzeniach i wybranych przeglądarkach?" />
+                <property name="answers" >
+                    <util:list value-type="pl.gda.spc.model.Answer">
+                        <bean class="pl.gda.spc.model.Answer">
+                            <property name="answer" value="QUnit" />
+                            <property name="value" value="a" />
+                        </bean>
+                        <bean class="pl.gda.spc.model.Answer">
+                            <property name="answer" value="JSHint" />
+                            <property name="value" value="b" />
+                        </bean>
+                        <bean class="pl.gda.spc.model.Answer">
+                            <property name="answer" value="Karma" />
+                            <property name="value" value="c" />
+                        </bean>
+                        <bean class="pl.gda.spc.model.Answer">
+                            <property name="answer" value="PhantomJS" />
+                            <property name="value" value="d" />
+                            <property name="correct" value="true" />
+                        </bean>
+                    </util:list>
+                </property>
+            </bean>
+    </util:list>
+    
+    <jdbc:embedded-database id="dataSource" type="H2">
+	    <jdbc:script location="classpath:db-schema.sql"/>
+	</jdbc:embedded-database>
+	
+	<bean id="template" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+</beans>
